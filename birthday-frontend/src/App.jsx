@@ -61,7 +61,7 @@ function App() {
 
     setIsSubmitting(true);
     try {
-      await axios.post('http://localhost:9093/api/feedback', {
+      await axios.post('https://birthday-backend-production-xxxx.up.railway.app/api/feedback', {
         guestName: guestName || 'Anonymous Friend',
         dream: dream || 'Not specified',
         feedback: feedback,
@@ -160,7 +160,7 @@ function App() {
         {currentSlide === 1 && (
           <div style={styles.slideBody}>
             <div style={styles.icon}>🎉</div>
-            <h1 style={styles.title}>ಹುಟ್ಟು ಹಬ್ಬದ ಶುಭಾಶಯಗಳು, {guestName}! 🎂</h1>
+            <h1 style={styles.title}>Have A Wonderfull, Happy Healthy Birth Day to Youhhh!, {guestName}! 🎂❤️🎇✨</h1>
             <p style={styles.subtitle}>Wishing you a day filled with laughter, success, and beautiful memories!</p>
 
             <div style={styles.colorBanner}>
