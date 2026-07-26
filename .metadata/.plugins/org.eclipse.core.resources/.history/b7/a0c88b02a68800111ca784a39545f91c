@@ -1,0 +1,3 @@
+spring.application.name=birthday-backend
+
+server.port=9093

@@ -1,0 +1,49 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "feedback")
+public class Feedback {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String guestName;
+    private String dream;
+
+    @Column(columnDefinition = "TEXT")
+    private String feedback;
+
+    private String rating;
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Feedback() {}
+
+    public Feedback(String guestName, String dream, String feedback, String rating) {
+        this.guestName = guestName;
+        this.dream = dream;
+        this.feedback = feedback;
+        this.rating = rating;
+    }
+
+    // Getters and Setters
+    public Long getId() { return id; }
+    public String getGuestName() { return guestName; }
+    public void setGuestName(String guestName) { this.guestName = guestName; }
+    public String getDream() { return dream; }
+    public void setDream(String dream) { this.dream = dream; }
+    public String getFeedback() { return feedback; }
+    public void setFeedback(String feedback) { this.feedback = feedback; }
+    public String getRating() { return rating; }
+    public void setRating(String rating) { this.rating = rating; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+}

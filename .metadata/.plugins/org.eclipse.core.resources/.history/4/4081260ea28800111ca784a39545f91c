@@ -1,0 +1,5 @@
+package com.example.birthday.entity;
+
+public class Feedback {
+
+}

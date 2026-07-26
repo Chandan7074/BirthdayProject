@@ -1,0 +1,36 @@
+package com.example.demo.controllers;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/birthday")
+@CrossOrigin(origins = "*") 
+@ComponentScan(basePackages = {"com.example.birthdaybackend", "com.example.controllers"}) // <-- Add this line
+public class BirthdayController {
+
+    @GetMapping("/greeting")
+    public Map<String, Object> getBirthdayData() {
+        Map<String, Object> response = new HashMap<>();
+        
+        response.put("birthdayPerson", "Chandan");
+        response.put("mainGreeting", "Wishing you a legendary year ahead filled with happiness, code that compiles without bugs, and endless success! 🎂✨");
+
+        List<Map<String, String>> wishes = Arrays.asList(
+            Map.of("from", "Mom & Dad", "message", "So proud of you! May all your dreams come true! ❤️"),
+            Map.of("from", "Best Friends", "message", "Happy Birthday buddy! Party hard and stay awesome! 🥂🎉"),
+            Map.of("from", "Work Buddies", "message", "Happy Birthday! May your PRs get approved on the first attempt today! 💻🚀")
+        );
+
+        response.put("wishes", wishes);
+        return response;
+    }
+}

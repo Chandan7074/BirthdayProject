@@ -1,0 +1,5 @@
+package com.example.birthdaybackend.controller;
+
+public class BirthdayController {
+
+}
