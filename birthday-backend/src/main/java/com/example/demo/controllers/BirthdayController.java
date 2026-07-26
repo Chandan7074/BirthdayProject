@@ -1,0 +1,43 @@
+package com.example.demo.controllers;
+
+import com.example.demo.entity.Feedback;
+import com.example.demo.repository.FeedbackRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "*") 
+public class BirthdayController {
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
+
+    @GetMapping("/greeting")
+    public ResponseEntity<Map<String, String>> getGreeting() {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "May your year ahead be filled with endless joy, peace, success, and incredible memories! ✨🎉");
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/feedback")
+    public ResponseEntity<Map<String, Object>> submitFeedback(@RequestBody Feedback feedback) {
+        Feedback saved = feedbackRepository.save(feedback);
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "Feedback saved successfully to MySQL!");
+        response.put("id", saved.getId());
+        return ResponseEntity.status(201).body(response);
+    }
+
+    
+    @GetMapping("/admin/responses")
+    public ResponseEntity<List<Feedback>> getAllResponses() {
+        return ResponseEntity.ok(feedbackRepository.findAll());
+    }
+}
