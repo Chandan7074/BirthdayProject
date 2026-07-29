@@ -1,6 +1,9 @@
 import axios from 'axios';
 import { useRef, useState } from 'react';
 
+// 1. Dynamic API Base URL from .env (Fallback to local development port)
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:9093';
+
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -55,13 +58,13 @@ function App() {
     setSuggestion(`"${userDream}" - ನಿಮ್ಮ ಈ ಕನಸನ್ನು ನನಸು ಮಾಡಲು ಶ್ರಮವಹಿಸಿ. ನಿಮ್ಮ ಭವಿಷ್ಯ ಉಜ್ವಲವಾಗಲಿ! 🚀`);
   };
 
-  // Submit Feedback to Spring Boot Backend (Port 9093)
+  // 2. Updated Feedback Submission using Dynamic Base URL
   const handleSubmitFeedback = async () => {
     if (!feedback.trim()) return;
 
     setIsSubmitting(true);
     try {
-      await axios.post('https://birthday-backend-production-xxxx.up.railway.app/api/feedback', {
+      await axios.post(`${API_BASE_URL}/api/feedback`, {
         guestName: guestName || 'Anonymous Friend',
         dream: dream || 'Not specified',
         feedback: feedback,
@@ -71,7 +74,7 @@ function App() {
       setSubmitted(true);
     } catch (error) {
       console.error('Error submitting feedback:', error);
-      alert('Could not connect to Spring Boot backend! Make sure it is running on port 9093.');
+      alert('Could not connect to Spring Boot backend! Please check server logs.');
     } finally {
       setIsSubmitting(false);
     }
