@@ -28,3 +28,13 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// 🟢 ADD THESE TWO LINES TO DISABLE PLAIN JAR & ENABLE BOOTJAR ONLY:
+jar {
+	enabled = false
+}
+
+bootJar {
+	enabled = true
+	archiveFileName = 'app.jar'
+}
